@@ -45,9 +45,9 @@ public class ModifyGui extends Screen {
             assert this.client != null;
             this.client.openScreen(null);
         });
-        this.exit = new ButtonWidget(w + 200 - 150, h + offsetY + 25, 150, 20, Text.of("Cancel"), (btn) -> {
+        this.exit = new ButtonWidget(w + 200 - 150, h + offsetY + 25, 150, 20, Text.of("Login with email and pass"), (btn) -> {
             assert this.client != null;
-            this.client.openScreen(null);
+            this.client.openScreen(new LoginWithEmailScreen());
         });
         this.name.setEditable(true);
         this.name.setMaxLength(1000);
