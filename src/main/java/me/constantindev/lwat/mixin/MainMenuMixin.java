@@ -25,9 +25,8 @@ public class MainMenuMixin {
         RenderSystem.enableBlend();
         MinecraftClient.getInstance().textRenderer.draw(matrices, Text.of("Name: " + s.getUsername()), 5, 5, 0xFFFFFFFF);
         MinecraftClient.getInstance().textRenderer.draw(matrices, Text.of("UUID: " + s.getUuid()), 5, 15, 0xFFFFFFFF);
-        MinecraftClient.getInstance().textRenderer.draw(matrices, Text.of("Session ID: " + s.getSessionId()), 5, 25, 0xFFFFFFFF);
-        MinecraftClient.getInstance().textRenderer.draw(matrices, Text.of("Access token: Lmao you thought"), 5, 35, 0xFFFFFFFF);
-        ButtonWidget bw = new ButtonWidget(5, 45, 150, 20, Text.of("Modify"), (buttonWidget) -> {
+        MinecraftClient.getInstance().textRenderer.draw(matrices, Text.of("Access token: Lmao you thought"), 5, 25, 0xFFFFFFFF);
+        ButtonWidget bw = new ButtonWidget(5, 35, 150, 20, Text.of("Modify"), (buttonWidget) -> {
             MinecraftClient.getInstance().openScreen(new ModifyGui());
         });
         bw.render(matrices, mouseX, mouseY, delta);
