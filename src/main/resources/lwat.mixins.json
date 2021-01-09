@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "package": "me.constantindev.lwat.mixin",
+  "compatibilityLevel": "JAVA_8",
+  "mixins": [
+    "MainMenuMixin"
+  ],
+  "client": [
+    "TickMixinUpdater"
+  ],
+  "server": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
