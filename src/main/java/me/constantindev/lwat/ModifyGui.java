@@ -10,9 +10,6 @@ import net.minecraft.client.util.math.MatrixStack;
 import net.minecraft.text.Text;
 import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ModifyGui extends Screen {
     TextFieldWidget name;
     TextFieldWidget uuid;
@@ -21,6 +18,7 @@ public class ModifyGui extends Screen {
     ButtonWidget save;
     ButtonWidget exit;
     int offsetY = 50;
+
     public ModifyGui() {
         super(Text.of("ModifySession"));
     }
@@ -34,20 +32,20 @@ public class ModifyGui extends Screen {
 
     @Override
     protected void init() {
-        int h = this.height/2;
-        int w = this.width/2;
+        int h = this.height / 2;
+        int w = this.width / 2;
         //fill(matrices,0,0,this.width,this.height,0x33000000);
         Session s = MinecraftClient.getInstance().getSession();
-        this.name    = new TextFieldWidget(this.textRenderer,w-200,h+offsetY*-2,400,20,Text.of("none"));
-        this.uuid    = new TextFieldWidget(this.textRenderer,w-200,h+offsetY*-1,400,20,Text.of("none"));
-        this.id      = new TextFieldWidget(this.textRenderer,w-200,h+offsetY*0,400,20,Text.of("none"));
-        this.session = new TextFieldWidget(this.textRenderer,w-200,h+offsetY*1,400,20,Text.of("none"));
-        this.save = new ButtonWidget(w-200,h+offsetY+25,150,20,Text.of("Save config"),(btn)->{
-            Config.newsession = new Session(this.name.getText(),this.uuid.getText(),this.session.getText(),"legacy");
+        this.name = new TextFieldWidget(this.textRenderer, w - 200, h + offsetY * -2, 400, 20, Text.of("none"));
+        this.uuid = new TextFieldWidget(this.textRenderer, w - 200, h + offsetY * -1, 400, 20, Text.of("none"));
+        this.id = new TextFieldWidget(this.textRenderer, w - 200, h + offsetY * 0, 400, 20, Text.of("none"));
+        this.session = new TextFieldWidget(this.textRenderer, w - 200, h + offsetY * 1, 400, 20, Text.of("none"));
+        this.save = new ButtonWidget(w - 200, h + offsetY + 25, 150, 20, Text.of("Save config"), (btn) -> {
+            Config.newsession = new Session(this.name.getText(), this.uuid.getText(), this.session.getText(), "legacy");
             assert this.client != null;
             this.client.openScreen(null);
         });
-        this.exit = new ButtonWidget(w+200-150,h+offsetY+25,150,20,Text.of("Cancel"),(btn)->{
+        this.exit = new ButtonWidget(w + 200 - 150, h + offsetY + 25, 150, 20, Text.of("Cancel"), (btn) -> {
             assert this.client != null;
             this.client.openScreen(null);
         });
@@ -68,21 +66,21 @@ public class ModifyGui extends Screen {
 
     @Override
     public void render(MatrixStack matrices, int mouseX, int mouseY, float delta) {
-        int w = this.width/2;
+        int w = this.width / 2;
         matrices.push();
         this.renderBackground(matrices);
         RenderSystem.enableBlend();
-        GL11.glScaled(4,4,4);
-        this.textRenderer.draw(matrices,"Session stealer",(w-this.textRenderer.getWidth("Session stealer")*2)/4,50/4,0xFFFFFFFF);
+        GL11.glScaled(4, 4, 4);
+        this.textRenderer.draw(matrices, "Session stealer", (w - this.textRenderer.getWidth("Session stealer") * 2) / 4, 50 / 4, 0xFFFFFFFF);
 
-        GL11.glScaled(.25,.25,.25);
-        MinecraftClient.getInstance().textRenderer.draw(matrices,"Username",w-this.textRenderer.getWidth("Username")/2,this.name.y-20,0xFFFFFFFF);
+        GL11.glScaled(.25, .25, .25);
+        MinecraftClient.getInstance().textRenderer.draw(matrices, "Username", w - this.textRenderer.getWidth("Username") / 2, this.name.y - 20, 0xFFFFFFFF);
         this.name.render(matrices, mouseX, mouseY, delta);
-        MinecraftClient.getInstance().textRenderer.draw(matrices,"UUID",w-this.textRenderer.getWidth("UUID")/2,this.uuid.y-20,0xFFFFFFFF);
+        MinecraftClient.getInstance().textRenderer.draw(matrices, "UUID", w - this.textRenderer.getWidth("UUID") / 2, this.uuid.y - 20, 0xFFFFFFFF);
         this.uuid.render(matrices, mouseX, mouseY, delta);
-        MinecraftClient.getInstance().textRenderer.draw(matrices,"Session ID (dont modify)",w-this.textRenderer.getWidth("Session ID (dont modify)")/2,this.id.y-20,0xFFFFFFFF);
+        MinecraftClient.getInstance().textRenderer.draw(matrices, "Session ID (dont modify)", w - this.textRenderer.getWidth("Session ID (dont modify)") / 2, this.id.y - 20, 0xFFFFFFFF);
         this.id.render(matrices, mouseX, mouseY, delta);
-        MinecraftClient.getInstance().textRenderer.draw(matrices,"Token",w-this.textRenderer.getWidth("Token")/2,this.session.y-20,0xFFFFFFFF);
+        MinecraftClient.getInstance().textRenderer.draw(matrices, "Token", w - this.textRenderer.getWidth("Token") / 2, this.session.y - 20, 0xFFFFFFFF);
         this.session.render(matrices, mouseX, mouseY, delta);
         this.save.render(matrices, mouseX, mouseY, delta);
         this.exit.render(matrices, mouseX, mouseY, delta);
@@ -103,7 +101,7 @@ public class ModifyGui extends Screen {
 
     @Override
     public boolean mouseClicked(double mouseX, double mouseY, int button) {
-        this.save.mouseClicked(mouseX,mouseY,button);
+        this.save.mouseClicked(mouseX, mouseY, button);
         this.exit.mouseClicked(mouseX, mouseY, button);
         this.name.mouseClicked(mouseX, mouseY, button);
         this.uuid.mouseClicked(mouseX, mouseY, button);
