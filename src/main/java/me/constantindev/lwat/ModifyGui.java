@@ -18,9 +18,12 @@ public class ModifyGui extends Screen {
     ButtonWidget save;
     ButtonWidget exit;
     int offsetY = 50;
+    Screen parent;
 
-    public ModifyGui() {
+    public ModifyGui(Screen parent) {
+
         super(Text.of("ModifySession"));
+        this.parent = parent;
     }
 
     @Override
@@ -61,6 +64,10 @@ public class ModifyGui extends Screen {
         this.session.setEditable(true);
         this.session.setMaxLength(1000);
         this.session.setText(s.getAccessToken());
+        ButtonWidget bw = new ButtonWidget(1,1,20,20,Text.of("<"),(btn)->{
+            this.client.openScreen(parent);
+        });
+        this.addButton(bw);
         super.init();
     }
 
@@ -107,6 +114,9 @@ public class ModifyGui extends Screen {
         this.uuid.mouseClicked(mouseX, mouseY, button);
         this.id.mouseClicked(mouseX, mouseY, button);
         this.session.mouseClicked(mouseX, mouseY, button);
+        this.buttons.forEach(abstractButtonWidget -> {
+            abstractButtonWidget.mouseClicked(mouseX, mouseY, button);
+        });
         return false;
     }
 
